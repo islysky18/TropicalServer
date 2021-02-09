@@ -1,0 +1,388 @@
+﻿@*@model System.Data.DataTable
+    @{
+        ViewBag.Title = "Orders";
+    }
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <h2>Orders</h2>
+
+    <table class="table table-bordered table-striped">
+            <tr>
+                <th>Tracking #</th>
+                <th>Order Date</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Route #</th>
+            </tr>
+            @for (int i = 0; i < Model.Rows.Count; i++) {
+        <tr>
+            <td>@Model.Rows[i][1]</td>
+            <td>@Model.Rows[i][2]</td>
+            <td>@Model.Rows[i][3]</td>
+            <td>@Model.Rows[i][4]</td>
+            <td>@Model.Rows[i][5]</td>
+            <td>@Model.Rows[i][6]</td>
+        </tr>
+
+            }
+        </table>*@
+
+
+@*
+    @model IEnumerable<TropicalServerApp.Models.ViewModel>
+    @{
+        ViewBag.Title = "Orders";
+    }
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @helper AlternateBackground(string color)
+    {
+        if (ViewBag.count == null) { ViewBag.count = 0; }
+        <text>style="background-color:@(ViewBag.count % 2 == 1 ? color : "#FFFFFF")"</text>
+        ViewBag.count++;
+    }
+
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>OrderTest</title>
+        <link href="~/Content/TropicalStyles/Orders.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="CriteriaBar">
+            <div class="Criteria">
+                <label class="label">Order Date:</label>
+                <select>
+                    <option>Today</option>
+                    <option>Last 7 Days</option>
+                    <option>Last 1 Month</option>
+                    <option>Last 6 Months</option>
+                </select>
+                <label class="label" id="myInput">Customer ID:</label><input class="Input" type="text" />
+                <label class="label" id="myInput">Customer Name:</label><input class="Input" type="text" />
+                <label class="label">Sales Manager</label>
+                <select></select>
+            </div>
+            <div id="grid">
+                <table class="gvOrders">
+                    <thead>
+                        <tr>
+                            <th>Tracking #</th>
+                            <th>Order Date</th>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Address</th>
+                            <th>Route</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tdata">
+                        @foreach (var item in Model)
+                        {
+                            <tr @AlternateBackground("#CED9DF")>
+                                <td>@Html.DisplayFor(modelItem => item.order.OrderTrackingNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.order.OrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.customer.CustID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.customer.CustName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.customer.CustOfficeAddress1)</td>
+                                <td>@Html.DisplayFor(modelItem => item.customer.CustRouteNumber)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+        <script>
+            $(document).ready(function () {
+                $("table > tbody tr:odd").css("background-color", "#F7F7F7");
+
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#tdata tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+            });
+        </script>
+
+
+    </body>
+
+    </html>
+*@
+
+@using System.Data
+@model DataSet
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+@helper AlternateBackground(string color)
+{
+    if (ViewBag.count == null) { ViewBag.count = 0; }
+    <text>style="background-color:@(ViewBag.count % 2 == 1 ? color : "#CED9DF")"</text>
+    ViewBag.count++;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderTest</title>
+    @*<link href="~/Content/TropicalStyles/Orders.css" rel="stylesheet" />*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    @*<script>
+        $(function () {
+            // Initialise the inputs on page load:
+            var today = new Date().toJSON().replace(/..(..)-(..)-(..).*/, '$2/$3/$1');
+            console.log(today);
+
+            $("#rangeval").change(applyFilter);
+
+            function applyFilter() {
+                var filterType = $("#rangeval").val(),
+                    start, end;
+                // Set the visibility of the two date fields:
+
+                // Depending on the type of filter, set the range of dates (start, end):
+                if (filterType === "") {
+                    // Show all: choose extreme dates
+                    start = new Date('1000-01-01');
+                    end = new Date('3000-01-01');
+                } else {
+                    // Show last X days:
+                    start = new Date();
+                    start.setHours(0, 0, 0, 0);
+                    start.setDate(start.getDate() - parseInt(filterType));
+                    end = new Date(); // today
+                }
+                // For each row: set the visibility depending on the date range
+                $(".mainBody tr").each(function () {
+                    var date = $('td:nth-child(2)', this).date();
+                    $(this).toggle(date >= start && date <= end);
+                });
+            }
+            applyFilter(); // Execute also on page load
+        });
+    </script>*@
+    <style>
+        #CriteriaBar {
+            background-color: #2C4E81;
+            padding: 9px;
+            margin-top: 5px;
+            height: 35px;
+        }
+
+            #CriteriaBar .Criteria {
+                text-align: center;
+                width: 240px;
+                margin: 0;
+                float: left;
+            }
+
+                #CriteriaBar .Criteria .label {
+                    font-size: 15px;
+                    color: #FFFFFF;
+                }
+
+                #CriteriaBar .Criteria .Input {
+                    width: 100px;
+                }
+
+        #grid {
+            width: 100%;
+            text-align: center;
+            height: 550px;
+            overflow: auto;
+        }
+
+        .gvOrders {
+            margin: 3px auto;
+            width: 99%;
+        }
+
+            .gvOrders th {
+                color: #FFFFFF;
+                background-color: #3B8FA7;
+                border: 2px solid #FFFFFF;
+                border-bottom: 5px solid #FFFFFF;
+            }
+
+            .gvOrders td {
+                border: 2px solid #FFFFFF;
+                /*padding-left: 100px;*/
+                text-align: left;
+            }
+
+            .gvOrders .Row {
+                background-color: #FFFFFF;
+            }
+
+            .gvOrders .AltRow {
+                background-color: #CED9DF;
+            }
+
+        .notfound {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order</h1>
+    <div id="CriteriaBar">
+        <div class="Criteria">
+            <label class="label">Order Date:</label>
+
+            <select class="inputxlg" id="rangeval">
+                <option></option>
+                <option>Today</option>
+                <option value="7">Last 7 Days</option>
+                <option value="31">Last 1 Month</option>
+                <option value="183">Last 6 Months</option>
+            </select>
+        </div>
+
+        <div class="Criteria">
+            <label class="label">Customer ID:</label><input id="myInput1" class="Input" type="text" />
+        </div>
+
+        <div class="Criteria">
+            <label class="label">Customer Name:</label><input id="myInput2" class="Input" type="text" />
+        </div >
+
+        <div class="Criteria">
+            <label class="label">Sales Manager</label>
+            <select></select>
+        </div>
+        
+    </div>
+        <div id="grid">
+            <table class="gvOrders">
+                <thead>
+                    <tr>
+                        <th>Tracking #</th>
+                        <th>Order Date</th>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Address</th>
+                        <th>Route</th>
+                        <th>Avalible Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tdata" class="mainBody">
+                    @foreach (DataRow row in Model.Tables[0].Rows)
+                    {
+                        <tr @AlternateBackground("#CED9DF")>
+                            <td>@row["OrderTrackingNumber"]</td>
+                            <td>@row["OrderDate"]</td>
+                            <td>@row["CustID"]</td>
+                            <td>@row["CustName"]</td>
+                            <td>@row["CustBillingAddress1"]</td>
+                            <td>@row["CustRouteNumber"]</td>
+                            <td>
+                                <a href="@Url.Action("ViewDetails", "Product")">View</a>
+                                <a href="@Url.Action("EditDetails", "Product")">Edit</a>
+                                <a href="#">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    <tr class='notfound'>
+                        <td colspan='6'>No record found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("table > tbody tr:odd").css("background-color", "#FFFFFF");
+
+            //$("#myInput1").on("keyup", function () {
+            //    var value = $(this).val().toLowerCase();
+            //    $("#tdata tr").filter(function () {
+            //        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            //    });
+            //});
+
+            $('#myInput1').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody tr').hide();
+
+                // Count total search result
+                var len = $('table tbody tr:not(.notfound) td:nth-child(3):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+            //$("#myInput2").on("keyup", function () {
+            //    var value = $(this).val().toLowerCase();
+            //    $("#tdata tr").filter(function () {
+            //        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            //    });
+            //});
+
+            $('#myInput2').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody tr').hide();
+
+                // Count total search result
+                var len = $('table tbody tr:not(.notfound) td:nth-child(4):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+            $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+                return function (elem) {
+                    return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+
+            
+
+
+        });
+        
+    </script>
+</body>
+
+</html>

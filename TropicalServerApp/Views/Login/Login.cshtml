@@ -1,0 +1,279 @@
+﻿@model TropicalServerApp.Models.Account
+
+@{
+    Layout = null;
+}
+
+@*@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@Html.EditorFor(m => m.UserID)<br/>
+@Html.EditorFor(m => m.Password)<br/>*@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - TropicalServer</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" type="text/css" href="~/Content/TropicalStyles/Login.css">
+
+    <style>
+        body {
+            margin: 10px auto;
+            padding: 0;
+            width: 980px;
+            height: 100%;
+            background-color: #CCCCCC;
+        }
+
+        #bodyLogin {
+            margin: 10px auto;
+            padding: 0;
+            width: 980px;
+            height: 750px;
+            background-color: #CCCCCC;
+        }
+
+        #header {
+            margin: 0;
+            padding: 0;
+            width: 980px;
+        }
+
+        #container {
+            margin-top: 0;
+            padding-top: 10px;
+            width: 980px;
+            height: 600px;
+            background-color: #FFFFFF;
+        }
+
+        #BodyDetail {
+            height: 300px;
+            width: 400px;
+            margin: 100px auto;
+            background-color: #FF6600;
+            color: #FFFFFF;
+            padding: 10px;
+        }
+
+        #Loginlbl {
+            font-size: 25px;
+            color: White;
+            font-family: Calibri;
+        }
+
+        #loginBox {
+            height: 220px;
+            margin-top: 10px;
+            width: 400px;
+            background-color: #FFCC00;
+        }
+
+        #errorBox {
+            text-align: center;
+            width: 420px;
+            margin: 10px auto;
+        }
+
+        #errorlbl {
+            font-size: 16px;
+            font-family: Calibri;
+            color: Red;
+        }
+
+        #useridlbl {
+            color: White;
+            font-family: Calibri;
+            font-size: 16pt;
+            margin-left: 20px;
+        }
+
+        #passwordlbl {
+            color: White;
+            font-family: Calibri;
+            font-size: 16pt;
+            margin-left: 20px;
+        }
+
+        #useridtextbox {
+            width: 250px;
+            margin-top: 50px;
+            margin-left: 24px;
+        }
+
+        #passwordtextbox {
+            width: 250px;
+            margin-top: 29px;
+            margin-left: 13px;
+        }
+
+        #login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #loginButton {
+            margin-left: 50px;
+        }
+
+        #forgot {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        #forgotPassword {
+            font-family: Calibri;
+            font-size: 16px;
+            text-decoration: underline;
+            color: #FFFFFF;
+            margin-left: 50px;
+        }
+
+        #forgotUsername {
+            font-family: calibri;
+            font-size: 16px;
+            text-decoration: underline;
+            color: #FFFFFF;
+            margin-right: 50px;
+        }
+
+        #emailIDlbl {
+            margin-left: 20px;
+            color: #FFFFFF;
+            font-family: Calibri;
+            font-size: 20px;
+        }
+
+        #emailIDtextbox {
+            width: 260px;
+            margin-left: 15px;
+            margin-top: 50px;
+        }
+
+        #usernamelbl {
+            margin-left: 20px;
+            color: White;
+            font-family: Calibri;
+            font-size: 20px;
+        }
+
+        #usernametextbox {
+            width: 245px;
+            margin-left: 15px;
+            margin-top: 50px;
+        }
+
+        #LoginBtn_1 {
+            color: White;
+            font-family: Calibri;
+            font-size: 9px;
+            background-color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 80px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #myFirstID {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+
+    
+        <div class="container">
+
+            <div class="main">
+
+                <div class="imageDisplay">
+                    <img height="100" src="@Url.Content("~/Images/Header.jpg")" />
+                </div>
+
+                @*<div>
+                @using (Html.BeginForm()) {
+                @Html.ValidationSummary(true)
+
+                 <fieldset>
+                     <legend>Account</legend>
+                     <div class="editor-label">
+                         @Html.LabelFor(model => model.UserID)
+                     </div>
+                     <div class="edit-field">
+                         @Html.EditorFor(model => model.UserID)
+                     </div>
+                 </fieldset>
+                }
+            </div>*@
+                <div></div>
+                <form id="BodyDetail" action="/Login/verify" method="post">
+                    <label id="Loginlbl">MOBILCUSTOMERORDERTRACKING</label>
+                    @*Login Box  Here *@
+                    <div id="loginBox">
+                        <label id="useridlbl">Login ID:</label>
+                        <input style="color:black" type="text" id="useridtextbox" name="UserID" required />
+                        <br />
+                        <label id="passwordlbl">Password:</label>
+                        <input style="color:black" type="password" id="passwordtextbox" name="Password" required />
+                        <br />
+
+                        <div id="login">
+                            <label for="rememberMe">Remember my ID</label><input type="checkbox" value="lsRememberMe" id="rememberMe" />
+                            <button id="LoginBtn_1" type="submit" value="Log-In">Log-In</button>
+                        </div>
+                        <br />
+                        <div id="forgot">
+                            <label id="forgotUsername"><a href='@Url.Action("ForgotUserID", "Login")'>Forgot userName</a></label>
+                            <label id="forgotPassword"><a href='@Url.Action("ForgotPassword", "Login")'>Forgot Password</a></label>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+        </div>
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(function () {
+
+            if (localStorage.chkbx && localStorage.chkbx != '') {
+                $('#rememberMe').attr('checked', 'checked');
+                $('#useridtextbox').val(localStorage.usrname);
+            } else {
+                $('#rememberMe').removeAttr('checked');
+                $('#useridtextbox').val('');
+            }
+
+            $('#rememberMe').click(function () {
+
+                if ($('#rememberMe').is(':checked')) {
+                    // save username and password
+                    localStorage.usrname = $('#useridtextbox').val();
+                    localStorage.chkbx = $('#rememberMe').val();
+                } else {
+                    localStorage.usrname = '';
+                    localStorage.chkbx = '';
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

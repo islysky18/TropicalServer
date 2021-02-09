@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TropicalServerApp.Models.ViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderTest</title>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <h4 class="text-center text-uppercase">Employee List</h4>
+        <table class="table table-striped table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Tracking #</th>
+                    <th>Order Date</th>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Address</th>
+                    <th>Route</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.order.OrderTrackingNumber</td>
+                        <td>@item.order.OrderDate</td>
+                        <td>@item.customer.CustID</td>
+                        <td>@item.customer.CustName</td>
+                        <td>@item.customer.CustOfficeAddress1</td>
+                        <td>@item.customer.CustRouteNumber</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

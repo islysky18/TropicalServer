@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TropicalServerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustNumber" Type="int" />
+          <Property Name="CustName" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeAddress1" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeAddress2" Type="varchar" MaxLength="100" />
+          <Property Name="CustOfficeCity" Type="varchar" MaxLength="50" />
+          <Property Name="CustOfficeState" Type="varchar" MaxLength="2" />
+          <Property Name="CustOfficeZip" Type="int" />
+          <Property Name="CustPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CustFaxNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CustRouteNumber" Type="int" />
+          <Property Name="CustSalesRepNumber" Type="int" />
+          <Property Name="CustOrderEntryContactName" Type="varchar" MaxLength="100" />
+          <Property Name="CustPromoGroup" Type="int" />
+          <Property Name="CustPriceGroup" Type="int" />
+          <Property Name="CustPaymentTermsCode" Type="int" />
+          <Property Name="CustPaymentType" Type="int" />
+          <Property Name="CustBillingAddress1" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingAddress2" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingCity" Type="varchar" MaxLength="100" />
+          <Property Name="CustBillingState" Type="varchar" MaxLength="2" />
+          <Property Name="CustBillingZip" Type="int" />
+          <Property Name="CustRouteVisitWeekDay" Type="varchar" MaxLength="10" />
+          <Property Name="CustSequence" Type="int" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderTrackingNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OrderRouteNumber" Type="int" />
+          <Property Name="OrderCustomerNumber" Type="int" />
+          <Property Name="OrderGroupNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OrderCaseNumbers" Type="int" />
+          <Property Name="OrderItemNumber" Type="int" />
+          <Property Name="OrderPromoNumber" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderItemQty" Type="int" />
+          <Property Name="ItemUnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ItemTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" />
+          <Property Name="TabletID" Type="varchar" MaxLength="50" />
+          <Property Name="DataSyncDateTime" Type="datetime" />
+          <Property Name="OrderConfirmFlag" Type="int" />
+          <Property Name="ItemType" Type="int" />
+          <Property Name="PerPoundItemsWeight" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="TropicalServerModelStoreContainer">
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TropicalServerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustNumber" Type="Int32" />
+          <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeAddress1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeAddress2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CustOfficeZip" Type="Int32" />
+          <Property Name="CustPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustFaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustRouteNumber" Type="Int32" />
+          <Property Name="CustSalesRepNumber" Type="Int32" />
+          <Property Name="CustOrderEntryContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustPromoGroup" Type="Int32" />
+          <Property Name="CustPriceGroup" Type="Int32" />
+          <Property Name="CustPaymentTermsCode" Type="Int32" />
+          <Property Name="CustPaymentType" Type="Int32" />
+          <Property Name="CustBillingAddress1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingAddress2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingCity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingState" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CustBillingZip" Type="Int32" />
+          <Property Name="CustRouteVisitWeekDay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustSequence" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderTrackingNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderRouteNumber" Type="Int32" />
+          <Property Name="OrderCustomerNumber" Type="Int32" />
+          <Property Name="OrderGroupNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderCaseNumbers" Type="Int32" />
+          <Property Name="OrderItemNumber" Type="Int32" />
+          <Property Name="OrderPromoNumber" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderItemQty" Type="Int32" />
+          <Property Name="ItemUnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ItemTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TabletID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataSyncDateTime" Type="DateTime" Precision="3" />
+          <Property Name="OrderConfirmFlag" Type="Int32" />
+          <Property Name="ItemType" Type="Int32" />
+          <Property Name="PerPoundItemsWeight" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="TropicalServerEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TropicalServerModelStoreContainer" CdmEntityContainer="TropicalServerEntities1">
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="TropicalServerModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustNumber" ColumnName="CustNumber" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="CustOfficeAddress1" ColumnName="CustOfficeAddress1" />
+                <ScalarProperty Name="CustOfficeAddress2" ColumnName="CustOfficeAddress2" />
+                <ScalarProperty Name="CustOfficeCity" ColumnName="CustOfficeCity" />
+                <ScalarProperty Name="CustOfficeState" ColumnName="CustOfficeState" />
+                <ScalarProperty Name="CustOfficeZip" ColumnName="CustOfficeZip" />
+                <ScalarProperty Name="CustPhoneNumber" ColumnName="CustPhoneNumber" />
+                <ScalarProperty Name="CustFaxNumber" ColumnName="CustFaxNumber" />
+                <ScalarProperty Name="CustRouteNumber" ColumnName="CustRouteNumber" />
+                <ScalarProperty Name="CustSalesRepNumber" ColumnName="CustSalesRepNumber" />
+                <ScalarProperty Name="CustOrderEntryContactName" ColumnName="CustOrderEntryContactName" />
+                <ScalarProperty Name="CustPromoGroup" ColumnName="CustPromoGroup" />
+                <ScalarProperty Name="CustPriceGroup" ColumnName="CustPriceGroup" />
+                <ScalarProperty Name="CustPaymentTermsCode" ColumnName="CustPaymentTermsCode" />
+                <ScalarProperty Name="CustPaymentType" ColumnName="CustPaymentType" />
+                <ScalarProperty Name="CustBillingAddress1" ColumnName="CustBillingAddress1" />
+                <ScalarProperty Name="CustBillingAddress2" ColumnName="CustBillingAddress2" />
+                <ScalarProperty Name="CustBillingCity" ColumnName="CustBillingCity" />
+                <ScalarProperty Name="CustBillingState" ColumnName="CustBillingState" />
+                <ScalarProperty Name="CustBillingZip" ColumnName="CustBillingZip" />
+                <ScalarProperty Name="CustRouteVisitWeekDay" ColumnName="CustRouteVisitWeekDay" />
+                <ScalarProperty Name="CustSequence" ColumnName="CustSequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="TropicalServerModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderTrackingNumber" ColumnName="OrderTrackingNumber" />
+                <ScalarProperty Name="OrderRouteNumber" ColumnName="OrderRouteNumber" />
+                <ScalarProperty Name="OrderCustomerNumber" ColumnName="OrderCustomerNumber" />
+                <ScalarProperty Name="OrderGroupNumber" ColumnName="OrderGroupNumber" />
+                <ScalarProperty Name="OrderCaseNumbers" ColumnName="OrderCaseNumbers" />
+                <ScalarProperty Name="OrderItemNumber" ColumnName="OrderItemNumber" />
+                <ScalarProperty Name="OrderPromoNumber" ColumnName="OrderPromoNumber" />
+                <ScalarProperty Name="OrderItemQty" ColumnName="OrderItemQty" />
+                <ScalarProperty Name="ItemUnitPrice" ColumnName="ItemUnitPrice" />
+                <ScalarProperty Name="ItemTotalPrice" ColumnName="ItemTotalPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TabletID" ColumnName="TabletID" />
+                <ScalarProperty Name="DataSyncDateTime" ColumnName="DataSyncDateTime" />
+                <ScalarProperty Name="OrderConfirmFlag" ColumnName="OrderConfirmFlag" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="PerPoundItemsWeight" ColumnName="PerPoundItemsWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
