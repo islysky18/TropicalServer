@@ -212,16 +212,20 @@
                  </fieldset>
                 }
             </div>*@
-                <div></div>
+            <div id="errorBox">
+                <label id="errorlbl">Sorry, User not found</label>
+            </div>
                 <form id="BodyDetail" action="/Login/verify" method="post">
                     <label id="Loginlbl">MOBILCUSTOMERORDERTRACKING</label>
                     @*Login Box  Here *@
+                    
+
                     <div id="loginBox">
                         <label id="useridlbl">Login ID:</label>
-                        <input style="color:black" type="text" id="useridtextbox" name="UserID" required />
+                        <input style="color:black" type="text" id="useridtextbox" placeholder="UserID" name="UserID" required />
                         <br />
                         <label id="passwordlbl">Password:</label>
-                        <input style="color:black" type="password" id="passwordtextbox" name="Password" required />
+                        <input style="color:black" type="password" id="passwordtextbox" placeholder="Password" name="Password" required />
                         <br />
 
                         <div id="login">
@@ -272,7 +276,7 @@
                 }
             });
         });
-
+       
     </script>
 </body>
 

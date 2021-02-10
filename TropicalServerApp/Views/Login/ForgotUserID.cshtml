@@ -1,4 +1,4 @@
-﻿
+﻿@model TropicalServerApp.Models.Account
 @{
     Layout = null;
 }
@@ -26,12 +26,12 @@
             <div class="imageDisplay">
                 <img height="100" src="@Url.Content("~/Images/Header.jpg")" />
             </div>
-            
+
             <div class="form-container">
-                <form action="#" method="POST" class="form-wrap">
-                    <h2>Forgot Password</h2>
+                <form action="/Login/SendEmail" method="POST" class="form-wrap">
+                    <h2>Forgot UserID</h2>
                     <div class="form-box">
-                        <input type="text" placeholder="Enter Email" />
+                        <input type="text" name="EmailID" placeholder="Enter Email" />
                     </div>
                     <div class="form-submit">
                         <input type="submit" value="Send" />
@@ -54,7 +54,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    
+
 </body>
 
 </html>

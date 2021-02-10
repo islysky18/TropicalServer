@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using TropicalServerApp.Models;
 using System.Data.SqlClient;
+using System.Net;
+using System.Net.Mail;
+using System.Drawing;
+using System.Configuration;
 
 namespace TropicalServerApp.Controllers
 {
@@ -58,6 +62,93 @@ namespace TropicalServerApp.Controllers
 
         public ActionResult Logout() {
             return RedirectToAction("/Login");
+        }
+
+        [HttpPost]
+        public ActionResult SendEmail(Account account)
+        {
+            connectionString();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "select UserID from tblUserLogin where EmailID='" + account.EmailID + "'";
+            dr = com.ExecuteReader();
+            if (dr.Read())
+            {
+
+                var senderEmail = new MailAddress("galaboompow@gmail.com", "galaboompow@gmail.com");
+                var receiverEmail = new MailAddress("islysky18@gmail.com", "Receiver");
+                var password = "Zzz1234567890!";
+                var sub = "Your Login Info";
+                var body = "Your Login in password is: " + dr["UserID"];
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password),
+                    EnableSsl = true,
+
+                };
+
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+                    Subject = sub,
+                    Body = body
+                })
+                {
+                    smtp.Send(mess);
+                }
+                con.Close();
+                return View("Success");
+            }
+            else {
+                con.Close();
+                return View("Error");
+                    }
+        }
+        public ActionResult SendPassWord(Account account)
+        {
+            connectionString();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "select UserID from tblUserLogin where EmailID='" + account.EmailID + "'";
+            dr = com.ExecuteReader();
+            if (dr.Read())
+            {
+
+                var senderEmail = new MailAddress("galaboompow@gmail.com", "galaboompow@gmail.com");
+                var receiverEmail = new MailAddress("islysky18@gmail.com", "Receiver");
+                var password = "Zzz1234567890!";
+                var sub = "Your Login Info";
+                var body = "Your Login in Password is: " + dr["Password"];
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password),
+                    EnableSsl = true,
+
+                };
+
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+                    Subject = sub,
+                    Body = body
+                })
+                {
+                    smtp.Send(mess);
+                }
+                con.Close();
+                return View("Success");
+            }
+            else
+            {
+                con.Close();
+                return View("Error");
+            }
         }
     }
 }
